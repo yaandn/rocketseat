@@ -7,7 +7,7 @@ import {
   Footer,
   TypeContainer,
 } from "./styles";
-import { Minus, Plus, ShoppingCart, SunDim } from "phosphor-react";
+import { Minus, Plus, ShoppingCart } from "phosphor-react";
 
 interface CoffeeProps {
   name: string;
