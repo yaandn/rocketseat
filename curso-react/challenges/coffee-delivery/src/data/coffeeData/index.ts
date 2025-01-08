@@ -14,6 +14,7 @@ import macchiato from "../../assets/macchiato.svg";
 import mochaccino from "../../assets/mochaccino.svg";
 
 interface Coffee {
+  id: string;
   name: string;
   type: string[];
   img: string;
@@ -23,6 +24,7 @@ interface Coffee {
 
 export const coffeData: Coffee[] = [
   {
+    id: "1",
     name: "Expresso Tradicional",
     type: ["Tradicional"],
     description: "O tradicional café feito com água quente e grãos moídos",
@@ -30,6 +32,7 @@ export const coffeData: Coffee[] = [
     img: expresso,
   },
   {
+    id: "2",
     name: "Expresso Americano",
     type: ["Tradicional"],
     description: "Expresso diluído, menos intenso que o tradicional",
@@ -37,6 +40,7 @@ export const coffeData: Coffee[] = [
     img: americano,
   },
   {
+    id: "3",
     name: "Expresso Cremoso",
     type: ["Tradicional"],
     description: "Café expresso tradicional com espuma cremosa",
@@ -44,6 +48,7 @@ export const coffeData: Coffee[] = [
     img: expressoCremoso,
   },
   {
+    id: "4",
     name: "Expresso Gelado",
     type: ["Tradicional", "Gelado"],
     description: "Bebida preparada com café expresso e cubos de gelo",
@@ -51,6 +56,7 @@ export const coffeData: Coffee[] = [
     img: cafeGelado,
   },
   {
+    id: "5",
     name: "Café com Leite",
     type: ["Tradicional", "Com Leite"],
     description: "Meio a meio de expresso tradicional com leite vaporizado",
@@ -58,6 +64,7 @@ export const coffeData: Coffee[] = [
     img: cafeComLeite,
   },
   {
+    id: "6",
     name: "Latte",
     type: ["Tradicional", "Com Leite"],
     description:
@@ -66,6 +73,7 @@ export const coffeData: Coffee[] = [
     img: latte,
   },
   {
+    id: "7",
     name: "Capuccino",
     type: ["Tradicional", "Com Leite"],
     description:
@@ -74,6 +82,7 @@ export const coffeData: Coffee[] = [
     img: cappuccino,
   },
   {
+    id: "8",
     name: "Macchiato",
     type: ["Tradicional", "Com Leite"],
     description:
@@ -82,6 +91,7 @@ export const coffeData: Coffee[] = [
     img: macchiato,
   },
   {
+    id: "9",
     name: "Mocaccino",
     type: ["Tradicional", "Com Leite"],
     description: "Café expresso com calda de chocolate, pouco leite e espuma",
@@ -89,6 +99,7 @@ export const coffeData: Coffee[] = [
     img: mochaccino,
   },
   {
+    id: "10",
     name: "Chocolate Quente",
     type: ["Especial", "Com Leite"],
     description: "Bebida feita com chocolate dissolvido no leite quente e café",
@@ -96,6 +107,7 @@ export const coffeData: Coffee[] = [
     img: chocolateQuente,
   },
   {
+    id: "11",
     name: "Cubano",
     type: ["Especial", "Alcoolico", "Gelado"],
     description:
@@ -104,14 +116,7 @@ export const coffeData: Coffee[] = [
     img: cubano,
   },
   {
-    name: "Cubano",
-    type: ["Especial", "Alcoolico", "Gelado"],
-    description:
-      "Drink gelado de café expresso com rum, creme de leite e hortelã",
-    price: 9.9,
-    img: cubano,
-  },
-  {
+    id: "12",
     name: "Havaiano",
     type: ["Especial"],
     description: "Bebida adocicada preparada com café e leite de coco",
@@ -119,6 +124,7 @@ export const coffeData: Coffee[] = [
     img: havaiano,
   },
   {
+    id: "13",
     name: "Árabe",
     type: ["Especial"],
     description: "Bebida preparada com grãos de café árabe e especiarias",
@@ -126,6 +132,7 @@ export const coffeData: Coffee[] = [
     img: arabe,
   },
   {
+    id: "14",
     name: "Irlandês",
     type: ["Especial", "Alcoólico"],
     description: "Bebida a base de café, uísque irlandês, açúcar e chantilly",
