@@ -18,6 +18,13 @@ export const GlobalStyles = createGlobalStyle`
 
   }
 
+  a {
+    &:focus {
+      outline: 0;
+      box-shadow: none;
+    }
+  }
+
   button, textArea,input, body {
     outline: 0;
     font-family: "Roboto", sans-serif;
