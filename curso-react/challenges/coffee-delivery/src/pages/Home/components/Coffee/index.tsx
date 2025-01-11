@@ -39,9 +39,13 @@ export function Coffee({ name, type, description, img, price }: CoffeeProps) {
         </div>
         <CartArea>
           <AddAndRemoveCartArea>
-            <Minus weight="bold" />
+            <div>
+              <Minus weight="bold" />
+            </div>
             <span>1</span>
-            <Plus weight="bold" />
+            <div>
+              <Plus weight="bold" />
+            </div>
           </AddAndRemoveCartArea>
           <ButtonOpenCart>
             <NavLink to="confirmOrder">
