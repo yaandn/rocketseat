@@ -13,7 +13,7 @@ import latte from "../../assets/latte.svg";
 import macchiato from "../../assets/macchiato.svg";
 import mochaccino from "../../assets/mochaccino.svg";
 
-interface Coffee {
+export interface CoffeeType {
   id: string;
   name: string;
   type: string[];
@@ -22,7 +22,7 @@ interface Coffee {
   price: number;
 }
 
-export const coffeData: Coffee[] = [
+export const coffeData: CoffeeType[] = [
   {
     id: "1",
     name: "Expresso Tradicional",

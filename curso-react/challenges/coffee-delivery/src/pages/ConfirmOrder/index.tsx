@@ -17,9 +17,21 @@ import {
   SelectedCoffeesCotainer,
 } from "./styles";
 
-import arabe from "../../assets/arabe.svg";
+import { useContext } from "react";
+import { OrderContext } from "../../context/orderContext";
 
 export function ConfirmOrder() {
+  const { cart, decrementItemCount, incrementItemCount } =
+    useContext(OrderContext);
+
+  function handleincrementItemCount(id: string) {
+    incrementItemCount(id);
+  }
+
+  function handledecrementItemCount(id: string) {
+    decrementItemCount(id);
+  }
+
   return (
     <ConfirmOrderContainer>
       <CompleteOrderContainer>
@@ -94,62 +106,42 @@ export function ConfirmOrder() {
         <h3>Cafés selecionados</h3>
         <div className="selectedCoffeeContent">
           <div className="selectedListCoffee">
-            <div className="selectedCoffeeItem">
-              <div className="imgAndButtons">
-                <img src={arabe} />
-                <div className="textAndButtons">
-                  <span>Expresso Tradicional</span>
-                  <div className="buttons">
-                    <div className="counter">
-                      <div>
-                        <Minus weight="bold" />
-                      </div>
-                      <span>1</span>
-                      <div>
-                        <Plus weight="bold" />
-                      </div>
-                    </div>
-                    <button className="remove">
-                      <div>
-                        <Trash size={16} />
-                      </div>
-                      Remover
-                    </button>
-                  </div>
-                </div>
-              </div>
-              <div className="priceContent">
-                <span>R$ 9,90</span>
-              </div>
-            </div>
-            <div className="selectedCoffeeItem">
-              <div className="imgAndButtons">
-                <img src={arabe} />
-                <div className="textAndButtons">
-                  <span>Expresso Tradicional</span>
-                  <div className="buttons">
-                    <div className="counter">
-                      <div>
-                        <Minus weight="bold" />
-                      </div>
-                      <span>1</span>
-                      <div>
-                        <Plus weight="bold" />
+            {cart.map(({ item, quantity }) => {
+              return (
+                <div className="selectedCoffeeItem" key={item.id}>
+                  <div className="imgAndButtons">
+                    <img src={item.img} />
+                    <div className="textAndButtons">
+                      <span>{item.name}</span>
+                      <div className="buttons">
+                        <div className="counter">
+                          <button
+                            onClick={() => handledecrementItemCount(item.id)}
+                          >
+                            <Minus weight="bold" />
+                          </button>
+                          <span>{quantity}</span>
+                          <button
+                            onClick={() => handleincrementItemCount(item.id)}
+                          >
+                            <Plus weight="bold" />
+                          </button>
+                        </div>
+                        <button className="remove">
+                          <div>
+                            <Trash size={16} />
+                          </div>
+                          Remover
+                        </button>
                       </div>
                     </div>
-                    <button className="remove">
-                      <div>
-                        <Trash size={16} />
-                      </div>
-                      Remover
-                    </button>
+                  </div>
+                  <div className="priceContent">
+                    <span>{item.price}</span>
                   </div>
                 </div>
-              </div>
-              <div className="priceContent">
-                <span>R$ 9,90</span>
-              </div>
-            </div>
+              );
+            })}
           </div>
 
           <footer>

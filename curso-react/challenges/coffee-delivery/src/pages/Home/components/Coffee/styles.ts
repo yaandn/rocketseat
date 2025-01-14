@@ -96,12 +96,20 @@ export const AddAndRemoveCartArea = styled.div`
   justify-content: center;
   padding: 0.5rem;
   gap: 0.5rem;
+  border-radius: 4px;
 
-  div {
-    color: ${(props) => props.theme["purple-dark"]};
+  button {
+    color: ${(props) => props.theme["purple"]};
     cursor: pointer;
     flex: 1;
     display: flex;
+    border: none;
+    background-color: transparent;
+
+    &:focus {
+      outline: 0;
+      box-shadow: none;
+    }
 
     &:hover {
       color: ${(props) => props.theme["purple"]};
@@ -113,8 +121,9 @@ export const AddAndRemoveCartArea = styled.div`
   }
 `;
 
-export const ButtonOpenCart = styled.div`
-  a {
+export const ButtonAddCart = styled.button`
+  border: none;
+  div {
     padding: 0.5rem;
     background: ${(props) => props.theme["purple-dark"]};
     color: ${(props) => props.theme["base-card"]};

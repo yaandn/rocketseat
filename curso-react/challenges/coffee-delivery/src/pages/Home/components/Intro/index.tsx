@@ -44,8 +44,8 @@ export function Intro() {
         <div className="highlights">
           {highlights.map((item) => {
             return (
-              <div className="highlight-item">
-                <Icon bgColor={item.bgColor}>{item.icon}</Icon>
+              <div className="highlight-item" key={item.bgColor}>
+                <Icon bgcolor={item.bgColor}>{item.icon}</Icon>
                 <span>{item.description}</span>
               </div>
             );

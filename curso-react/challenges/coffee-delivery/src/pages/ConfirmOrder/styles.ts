@@ -182,11 +182,17 @@ export const SelectedCoffeesCotainer = styled.div`
           gap: 0.5rem;
           border-radius: 8px;
 
-          div {
+          button {
             color: ${(props) => props.theme["purple"]};
             cursor: pointer;
             flex: 1;
             display: flex;
+            border: none;
+
+            :focus {
+              box-shadow: none;
+              outline: 0;
+            }
 
             &:hover {
               color: ${(props) => props.theme["purple-dark "]};

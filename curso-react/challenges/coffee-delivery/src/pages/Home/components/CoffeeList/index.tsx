@@ -10,6 +10,7 @@ export function CoffeeList() {
         {coffeData.map((coffee) => {
           return (
             <Coffee
+              id={coffee.id}
               key={coffee.id}
               img={coffee.img}
               description={coffee.description}

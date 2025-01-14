@@ -69,11 +69,11 @@ const bgColorIcon = {
 } as const;
 
 interface IconProps {
-  bgColor: keyof typeof bgColorIcon;
+  bgcolor: keyof typeof bgColorIcon;
 }
 
 export const Icon = styled.div<IconProps>`
-  background-color: ${(props) => props.theme[bgColorIcon[props.bgColor]]};
+  background-color: ${(props) => props.theme[bgColorIcon[props.bgcolor]]};
   display: flex;
   align-items: center;
   justify-content: center;

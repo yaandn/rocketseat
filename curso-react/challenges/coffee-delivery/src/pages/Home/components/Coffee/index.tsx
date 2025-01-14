@@ -1,15 +1,18 @@
-import { NavLink } from "react-router-dom";
 import {
   AddAndRemoveCartArea,
-  ButtonOpenCart,
+  ButtonAddCart,
   CartArea,
   CoffeeContainer,
   Footer,
   TypeContainer,
 } from "./styles";
 import { Minus, Plus, ShoppingCart } from "phosphor-react";
+import { useContext, useState } from "react";
+import { ItemType, OrderContext } from "../../../../context/orderContext";
+import { CoffeeType } from "../../../../data/coffeeData";
 
 interface CoffeeProps {
+  id: string;
   name: string;
   type: string[];
   img: string;
@@ -17,14 +20,41 @@ interface CoffeeProps {
   price: number;
 }
 
-export function Coffee({ name, type, description, img, price }: CoffeeProps) {
+export function Coffee({
+  id,
+  name,
+  type,
+  description,
+  img,
+  price,
+}: CoffeeProps) {
+  const [quantityItem, setQuantityItem] = useState(0);
+  const { addItemCart } = useContext(OrderContext);
+
+  function handleAddCountCoffee() {
+    setQuantityItem((state) => state + 1);
+  }
+
+  function handleDecrementCountCoffee() {
+    setQuantityItem((state) => state - 1);
+  }
+
+  function handleAddItemCart() {
+    const newItem: ItemType = {
+      item: { id, description, img, name, price, type },
+      quantity: quantityItem,
+    };
+
+    addItemCart(newItem);
+  }
+
   return (
     <CoffeeContainer>
       <img src={img} />
       <TypeContainer>
         {type.map((item) => {
           return (
-            <div>
+            <div key={item}>
               <span>{item.toUpperCase()}</span>
             </div>
           );
@@ -39,19 +69,22 @@ export function Coffee({ name, type, description, img, price }: CoffeeProps) {
         </div>
         <CartArea>
           <AddAndRemoveCartArea>
-            <div>
+            <button
+              onClick={handleDecrementCountCoffee}
+              disabled={quantityItem <= 0}
+            >
               <Minus weight="bold" />
-            </div>
-            <span>1</span>
-            <div>
+            </button>
+            <span>{quantityItem}</span>
+            <button onClick={handleAddCountCoffee}>
               <Plus weight="bold" />
-            </div>
+            </button>
           </AddAndRemoveCartArea>
-          <ButtonOpenCart>
-            <NavLink to="confirmOrder">
+          <ButtonAddCart onClick={handleAddItemCart}>
+            <div>
               <ShoppingCart size={22} weight="fill" />
-            </NavLink>
-          </ButtonOpenCart>
+            </div>
+          </ButtonAddCart>
         </CartArea>
       </Footer>
     </CoffeeContainer>
