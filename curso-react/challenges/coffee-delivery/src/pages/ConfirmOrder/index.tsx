@@ -122,6 +122,34 @@ export function ConfirmOrder() {
                 <span>R$ 9,90</span>
               </div>
             </div>
+            <div className="selectedCoffeeItem">
+              <div className="imgAndButtons">
+                <img src={arabe} />
+                <div className="textAndButtons">
+                  <span>Expresso Tradicional</span>
+                  <div className="buttons">
+                    <div className="counter">
+                      <div>
+                        <Minus weight="bold" />
+                      </div>
+                      <span>1</span>
+                      <div>
+                        <Plus weight="bold" />
+                      </div>
+                    </div>
+                    <button className="remove">
+                      <div>
+                        <Trash size={16} />
+                      </div>
+                      Remover
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div className="priceContent">
+                <span>R$ 9,90</span>
+              </div>
+            </div>
           </div>
 
           <footer>
