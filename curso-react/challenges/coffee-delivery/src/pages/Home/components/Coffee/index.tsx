@@ -9,7 +9,6 @@ import {
 import { Minus, Plus, ShoppingCart } from "phosphor-react";
 import { useContext, useState } from "react";
 import { ItemType, OrderContext } from "../../../../context/orderContext";
-import { CoffeeType } from "../../../../data/coffeeData";
 
 interface CoffeeProps {
   id: string;
@@ -80,7 +79,10 @@ export function Coffee({
               <Plus weight="bold" />
             </button>
           </AddAndRemoveCartArea>
-          <ButtonAddCart onClick={handleAddItemCart}>
+          <ButtonAddCart
+            onClick={handleAddItemCart}
+            disabled={quantityItem <= 0}
+          >
             <div>
               <ShoppingCart size={22} weight="fill" />
             </div>

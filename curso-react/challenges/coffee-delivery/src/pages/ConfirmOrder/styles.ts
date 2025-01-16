@@ -188,14 +188,20 @@ export const SelectedCoffeesCotainer = styled.div`
             flex: 1;
             display: flex;
             border: none;
+            background: none;
 
-            :focus {
+            &:focus {
               box-shadow: none;
               outline: 0;
             }
 
             &:hover {
               color: ${(props) => props.theme["purple-dark "]};
+            }
+
+            &:disabled {
+              opacity: 0.7;
+              cursor: auto;
             }
           }
 

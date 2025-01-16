@@ -18,11 +18,16 @@ import {
 } from "./styles";
 
 import { useContext } from "react";
-import { OrderContext } from "../../context/orderContext";
+import { ItemType, OrderContext } from "../../context/orderContext";
 
 export function ConfirmOrder() {
-  const { cart, decrementItemCount, incrementItemCount } =
-    useContext(OrderContext);
+  const {
+    cart,
+    totalValueCart,
+    decrementItemCount,
+    incrementItemCount,
+    removeItemCart,
+  } = useContext(OrderContext);
 
   function handleincrementItemCount(id: string) {
     incrementItemCount(id);
@@ -30,6 +35,10 @@ export function ConfirmOrder() {
 
   function handledecrementItemCount(id: string) {
     decrementItemCount(id);
+  }
+
+  function handleRemoveItemCart(itemCart: ItemType) {
+    removeItemCart(itemCart);
   }
 
   return (
@@ -117,6 +126,7 @@ export function ConfirmOrder() {
                         <div className="counter">
                           <button
                             onClick={() => handledecrementItemCount(item.id)}
+                            disabled={quantity <= 1}
                           >
                             <Minus weight="bold" />
                           </button>
@@ -127,7 +137,12 @@ export function ConfirmOrder() {
                             <Plus weight="bold" />
                           </button>
                         </div>
-                        <button className="remove">
+                        <button
+                          className="remove"
+                          onClick={() =>
+                            handleRemoveItemCart({ item, quantity })
+                          }
+                        >
                           <div>
                             <Trash size={16} />
                           </div>
@@ -137,7 +152,10 @@ export function ConfirmOrder() {
                     </div>
                   </div>
                   <div className="priceContent">
-                    <span>{item.price}</span>
+                    <span>
+                      R${" "}
+                      {item.price.toString().padEnd(4, "0").replace(".", ",")}
+                    </span>
                   </div>
                 </div>
               );
@@ -148,7 +166,12 @@ export function ConfirmOrder() {
             <div className="priceContentsList">
               <div className="priceContentsItem">
                 <span>Total de itens</span>
-                <p>R$ 29,70</p>
+                <p>
+                  {new Intl.NumberFormat("pt-BR", {
+                    style: "currency",
+                    currency: "BRL",
+                  }).format(totalValueCart)}
+                </p>
               </div>
               <div className="priceContentsItem">
                 <span>Entrega</span>
@@ -156,7 +179,12 @@ export function ConfirmOrder() {
               </div>
               <div className="priceContentsItemTotal">
                 <span>Total</span>
-                <span>R$ 33,20</span>
+                <span>
+                  {new Intl.NumberFormat("pt-BR", {
+                    style: "currency",
+                    currency: "BRL",
+                  }).format(totalValueCart + 3.5)}
+                </span>
               </div>
             </div>
             <button>Confirmar Pedido</button>

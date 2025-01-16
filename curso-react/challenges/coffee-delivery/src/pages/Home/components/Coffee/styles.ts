@@ -123,6 +123,17 @@ export const AddAndRemoveCartArea = styled.div`
 
 export const ButtonAddCart = styled.button`
   border: none;
+  cursor: pointer;
+
+  &:disabled {
+    opacity: 0.7;
+    cursor: auto;
+  }
+
+  &:focus {
+    box-shadow: none;
+    outline: 0;
+  }
   div {
     padding: 0.5rem;
     background: ${(props) => props.theme["purple-dark"]};
