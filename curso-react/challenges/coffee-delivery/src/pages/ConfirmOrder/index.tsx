@@ -9,6 +9,7 @@ import {
   Trash,
 } from "phosphor-react";
 import {
+  ButtonSelect,
   CompleteOrderContainer,
   ConfirmOrderContainer,
   FormContainer,
@@ -18,16 +19,30 @@ import {
 } from "./styles";
 
 import { useContext } from "react";
-import { ItemType, OrderContext } from "../../context/orderContext";
+import {
+  ItemType,
+  OrderContext,
+  PayamentType,
+} from "../../context/orderContext";
+import { useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import z from "zod";
 
 export function ConfirmOrder() {
   const {
     cart,
     totalValueCart,
+    payamentForm,
     decrementItemCount,
     incrementItemCount,
     removeItemCart,
+    registerLocation,
+    registerPayamentform,
+    registerOrder,
   } = useContext(OrderContext);
+
+  const navigate = useNavigate();
 
   function handleincrementItemCount(id: string) {
     incrementItemCount(id);
@@ -41,6 +56,41 @@ export function ConfirmOrder() {
     removeItemCart(itemCart);
   }
 
+  const locationSchema = z.object({
+    cep: z.string().length(8).nonempty(),
+    road: z.string().nonempty(),
+    numberLocation: z.string().nonempty(),
+    complement: z.string().optional(),
+    neighboard: z.string().nonempty(),
+    city: z.string().nonempty(),
+    uf: z.string().nonempty(),
+  });
+
+  type LocationType = z.infer<typeof locationSchema>;
+
+  const { handleSubmit, reset, register } = useForm<LocationType>({
+    resolver: zodResolver(locationSchema),
+    defaultValues: {
+      cep: "",
+      city: "",
+      complement: "",
+      neighboard: "",
+      numberLocation: "",
+      road: "",
+      uf: "",
+    },
+  });
+
+  function handleSubmitButton(data: LocationType) {
+    registerLocation(data);
+    registerOrder(data);
+    navigate("/confirmedOrder");
+    reset();
+  }
+
+  function setPaymentForm(form: PayamentType) {
+    registerPayamentform(form);
+  }
   return (
     <ConfirmOrderContainer>
       <CompleteOrderContainer>
@@ -58,20 +108,20 @@ export function ConfirmOrder() {
             </header>
             <form>
               <div>
-                <Input placeholder="CEP" />
+                <Input placeholder="CEP" {...register("cep")} />
               </div>
 
-              <Input placeholder="Rua" />
+              <Input placeholder="Rua" {...register("road")} />
 
               <div className="numberAndComplement">
-                <Input placeholder="Número" />
-                <Input placeholder="Complemento" />
+                <Input placeholder="Número" {...register("numberLocation")} />
+                <Input placeholder="Complemento" {...register("complement")} />
               </div>
 
               <div className="lastLine">
-                <Input placeholder="Bairro" />
-                <Input placeholder="Cidade" />
-                <Input placeholder="UF" />
+                <Input placeholder="Bairro" {...register("neighboard")} />
+                <Input placeholder="Cidade" {...register("city")} />
+                <Input placeholder="UF" {...register("uf")} />
               </div>
             </form>
           </FormContainer>
@@ -89,24 +139,33 @@ export function ConfirmOrder() {
               </div>
             </header>
             <div className="containerSelectPayament">
-              <button>
+              <ButtonSelect
+                onClick={() => setPaymentForm("CREDIT_CARD")}
+                isActive={payamentForm === "CREDIT_CARD"}
+              >
                 <div>
                   <CreditCard size={16} />
                 </div>
                 Cartão de crédito
-              </button>
-              <button>
+              </ButtonSelect>
+              <ButtonSelect
+                onClick={() => setPaymentForm("DEBIT_CARD")}
+                isActive={payamentForm === "DEBIT_CARD"}
+              >
                 <div>
                   <Money size={16} />
                 </div>
-                Cartão de crédito
-              </button>
-              <button>
+                Cartão de Débito
+              </ButtonSelect>
+              <ButtonSelect
+                onClick={() => setPaymentForm("CASH")}
+                isActive={payamentForm === "CASH"}
+              >
                 <div>
                   <Bank size={16} />
                 </div>
-                Cartão de crédito
-              </button>
+                Dinheiro
+              </ButtonSelect>
             </div>
           </PayamentContainer>
         </div>
@@ -187,7 +246,10 @@ export function ConfirmOrder() {
                 </span>
               </div>
             </div>
-            <button>Confirmar Pedido</button>
+
+            <button onClick={handleSubmit(handleSubmitButton)}>
+              Confirmar Pedido
+            </button>
           </footer>
         </div>
       </SelectedCoffeesCotainer>

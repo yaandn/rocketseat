@@ -108,27 +108,41 @@ export const PayamentContainer = styled.div`
     display: flex;
     align-items: center;
     gap: 1rem;
+  }
+`;
 
-    button {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background-color: ${(props) => props.theme["base-button"]};
-      padding: 1rem;
-      text-transform: uppercase;
-      border: 0;
-      border-radius: 6px;
-      color: ${(props) => props.theme["base-text"]};
-      font-size: 0.75rem;
-      gap: 0.5rem;
+interface ButtonSelectProps {
+  isActive: boolean;
+}
 
-      div {
-        color: ${(props) => props.theme.purple};
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-    }
+export const ButtonSelect = styled.button<ButtonSelectProps>`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: ${(props) =>
+    props.isActive ? props.theme["purple-light"] : props.theme["base-button"]};
+  padding: 1rem;
+  text-transform: uppercase;
+  border: ${(props) =>
+    props.isActive ? `1px solid ${props.theme.purple}` : "0"};
+  border-color: ${(props) =>
+    props.isActive ? props.theme.purple : "transparet"};
+  border-radius: 6px;
+  color: ${(props) => props.theme["base-text"]};
+  font-size: 0.75rem;
+  gap: 0.5rem;
+  cursor: pointer;
+
+  &:focus {
+    outline: 0;
+    box-shadow: none;
+  }
+
+  div {
+    color: ${(props) => props.theme.purple};
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 `;
 

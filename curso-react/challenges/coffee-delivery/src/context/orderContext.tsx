@@ -7,25 +7,32 @@ export interface ItemType {
 }
 
 export interface LocationType {
-  cep: number;
+  cep: string;
   road: string;
   city: string;
-  numberLocation: number;
+  numberLocation: string;
   neighboard: string;
-  State: string;
+  uf: string;
   complement?: string;
 }
+
+export type PayamentType = "CREDIT_CARD" | "DEBIT_CARD" | "CASH";
 
 export interface OrderType {
   cart: ItemType[];
   locationOrder: LocationType;
-  payamentType: "CREDIT_CARD" | "DEBIT_CARD" | "CASH";
+  payamentType: PayamentType;
 }
 
 interface OrderContextProps {
   cart: ItemType[];
   quantityItemsCart: number;
   totalValueCart: number;
+  payamentForm: PayamentType;
+  order: OrderType;
+  registerLocation: (data: LocationType) => void;
+  registerPayamentform: (data: PayamentType) => void;
+  registerOrder: (location: LocationType) => void;
   addItemCart: (item: ItemType) => void;
   removeItemCart: (item: ItemType) => void;
   incrementItemCount: (id: string) => void;
@@ -42,6 +49,11 @@ export function OrderContextProvider({ children }: OrderContextProviderProps) {
   const [cart, setCart] = useState<ItemType[]>([]);
   const [quantityItemsCart, setQuantityItemsCart] = useState<number>(0);
   const [totalValueCart, setTotalValueCart] = useState<number>(0);
+  const [orderLocation, setOrderLocation] = useState<LocationType>(
+    {} as LocationType
+  );
+  const [payamentForm, setPayamentForm] = useState<PayamentType>("CREDIT_CARD");
+  const [order, setOrder] = useState<OrderType>({} as OrderType);
 
   function saveItemsStorage(updatedCart: ItemType[]) {
     const cartJSON = JSON.stringify(updatedCart);
@@ -54,6 +66,16 @@ export function OrderContextProvider({ children }: OrderContextProviderProps) {
     if (cartJSON) {
       const cartFormated = JSON.parse(cartJSON);
       setCart(cartFormated);
+    }
+  }
+
+  function getOrderStorage() {
+    const orderJSON = localStorage.getItem("@coffee-delivery: order-v1.0");
+
+    if (orderJSON) {
+      const orderFormated = JSON.parse(orderJSON);
+      console.log(orderFormated);
+      setOrder(orderFormated);
     }
   }
 
@@ -124,14 +146,34 @@ export function OrderContextProvider({ children }: OrderContextProviderProps) {
     setTotalValueCart(calculedTotalValue);
   }
 
+  function registerLocation(data: LocationType) {
+    setOrderLocation(data);
+  }
+
+  function registerPayamentform(data: PayamentType) {
+    setPayamentForm(data);
+  }
+
+  function registerOrder(location: LocationType) {
+    const newOrder: OrderType = {
+      cart,
+      locationOrder: location,
+      payamentType: payamentForm,
+    };
+    setOrder(newOrder);
+    const newOrderJSON = JSON.stringify(newOrder);
+    localStorage.setItem("@coffee-delivery: order-v1.0", newOrderJSON);
+  }
+
   useEffect(() => {
     getItemsStorage();
+    getOrderStorage();
   }, []);
 
   useEffect(() => {
     setQuantityItemsCart(cart.length);
     calcTotalValue();
-  }, [getItemsStorage]);
+  }, [cart]);
 
   return (
     <OrderContext.Provider
@@ -139,10 +181,15 @@ export function OrderContextProvider({ children }: OrderContextProviderProps) {
         cart,
         quantityItemsCart,
         totalValueCart,
+        order,
+        payamentForm,
         addItemCart,
         removeItemCart,
         incrementItemCount,
         decrementItemCount,
+        registerLocation,
+        registerPayamentform,
+        registerOrder,
       }}
     >
       {children}

@@ -2,11 +2,31 @@ import {
   ConfirmedOrderContainer,
   ConfirmedOrderContent,
   DetailsOrderContainer,
+  Icon,
 } from "./styles";
 import confirmedOrderImage from "../../assets/confirmedOrderImage.svg";
 import { CurrencyDollar, MapPin, Timer } from "phosphor-react";
+import { useContext } from "react";
+import { OrderContext } from "../../context/orderContext";
 
 export function ConfirmedOrder() {
+  const { order } = useContext(OrderContext);
+
+  const payamentOrderMap = {
+    CREDIT_CARD: "Cartão de Crédito",
+    DEBIT_CARD: "Cartão de Débito",
+    CASH: "Dinheiro",
+  };
+
+  if (!order || !order.locationOrder || !order.payamentType) {
+    return (
+      <ConfirmedOrderContainer>
+        <h3>Pedido não encontrado</h3>
+        <span>Por favor, tente novamente mais tarde.</span>
+      </ConfirmedOrderContainer>
+    );
+  }
+
   return (
     <ConfirmedOrderContainer>
       <h3>Uhu! Pedido confirmado</h3>
@@ -14,24 +34,26 @@ export function ConfirmedOrder() {
       <ConfirmedOrderContent>
         <DetailsOrderContainer>
           <div>
-            <div className="icon">
+            <Icon bgcolor="purple">
               <MapPin />
-            </div>
+            </Icon>
             <div>
               <span>
                 <strong>
-                  Entrega em Rua João Daniel Martinelli, 102
+                  Entrega em {order.locationOrder.road},
+                  {order.locationOrder.numberLocation}
                   <br />
                 </strong>
-                Farrapos - Porto Alegre, RS
+                {order.locationOrder.neighboard} - {order.locationOrder.city},{" "}
+                {order.locationOrder.uf}
               </span>
             </div>
           </div>
 
           <div>
-            <div className="icon">
+            <Icon bgcolor="yellow">
               <Timer weight="fill" />
-            </div>
+            </Icon>
             <div>
               <span>
                 Previsão de entrega
@@ -42,18 +64,18 @@ export function ConfirmedOrder() {
           </div>
 
           <div>
-            <div className="icon">
+            <Icon bgcolor="orange">
               <CurrencyDollar />
-            </div>
+            </Icon>
             <div>
               <span>
                 Pagamento na entrega <br />
-                <strong>Cartão de Crédito</strong>
+                <strong>{payamentOrderMap[order.payamentType]}</strong>
               </span>
             </div>
           </div>
         </DetailsOrderContainer>
-        <img src={confirmedOrderImage} />
+        <img src={confirmedOrderImage} alt="Imagem de confirmação de pedido" />
       </ConfirmedOrderContent>
     </ConfirmedOrderContainer>
   );

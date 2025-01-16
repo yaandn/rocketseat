@@ -30,18 +30,29 @@ export const DetailsOrderContainer = styled.div`
   flex-direction: column;
   border-radius: 6px 36px 6px 36px;
 
-  .icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: red;
-    padding: 0.5rem;
-    border-radius: 50%;
-  }
-
   div {
     display: flex;
     align-items: center;
     gap: 1rem;
   }
+`;
+
+const IconMapColor = {
+  purple: "purple",
+  yellow: "yellow",
+  orange: "yellow-dark",
+} as const;
+
+interface IconProps {
+  bgcolor: keyof typeof IconMapColor;
+}
+
+export const Icon = styled.div<IconProps>`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: ${(props) => props.theme[IconMapColor[props.bgcolor]]};
+  padding: 0.5rem;
+  border-radius: 50%;
+  color: ${(props) => props.theme.white};
 `;

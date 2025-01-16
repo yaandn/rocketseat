@@ -6,7 +6,7 @@ import { useContext } from "react";
 import { OrderContext } from "../../context/orderContext";
 
 export function Header() {
-  const { quantityItemsCart } = useContext(OrderContext);
+  const { quantityItemsCart, order } = useContext(OrderContext);
   return (
     <HeaderContainer>
       <NavLink to="/">
@@ -16,7 +16,7 @@ export function Header() {
       <div>
         <Location>
           <MapPin size={22} weight="fill" />
-          Porto Alegre, RS
+          {order?.locationOrder?.city}, {order?.locationOrder?.uf}
         </Location>
         <Cart>
           <NavLink to="/confirmOrder">
