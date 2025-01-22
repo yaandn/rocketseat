@@ -1,0 +1,20 @@
+{
+  "transacrions": [
+    {
+      "id": 1,
+      "description": "Desenvolvimento de site",
+      "type": "income",
+      "category": "venda",
+      "price": 14000,
+      "createdAt": "2025-01-22T10:04:26.470Z"
+    },
+    {
+      "id": 2,
+      "description": "Hamburger",
+      "type": "outcome",
+      "category": "Alimentação",
+      "price": 50,
+      "createdAt": "2025-01-21T10:04:26.470Z"
+    }
+  ]
+}
