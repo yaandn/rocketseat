@@ -1,5 +1,5 @@
 {
-  "transacrions": [
+  "transactions": [
     {
       "id": 1,
       "description": "Desenvolvimento de site",
@@ -13,8 +13,56 @@
       "description": "Hamburger",
       "type": "outcome",
       "category": "Alimentação",
-      "price": 50,
+      "price": 60,
       "createdAt": "2025-01-21T10:04:26.470Z"
+    },
+    {
+      "id": 3,
+      "description": "Ignite Rocketseat",
+      "type": "outcome",
+      "category": "Educação",
+      "price": 1980,
+      "createdAt": "2025-01-13T10:04:26.470Z"
+    },
+    {
+      "description": "Formatação de comutador",
+      "price": 120,
+      "category": "Serviço",
+      "type": "income",
+      "createdAt": "2025-01-22T15:03:21.611Z",
+      "id": 4
+    },
+    {
+      "description": "Futebol com amigos",
+      "price": 12,
+      "category": "Lazer",
+      "type": "outcome",
+      "createdAt": "2025-01-22T16:05:10.152Z",
+      "id": 5
+    },
+    {
+      "description": "Pastel",
+      "price": 15,
+      "category": "Alimentação",
+      "type": "outcome",
+      "createdAt": "2025-01-22T16:28:27.005Z",
+      "id": 6
+    },
+    {
+      "description": "Iorgute",
+      "price": 4,
+      "category": "Alimentação",
+      "type": "outcome",
+      "createdAt": "2025-01-22T16:32:37.995Z",
+      "id": 7
+    },
+    {
+      "description": "Desenvolvimento de app",
+      "price": 1000,
+      "category": "Serviço",
+      "type": "income",
+      "createdAt": "2025-01-22T16:34:10.921Z",
+      "id": 8
     }
   ]
 }
