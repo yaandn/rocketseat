@@ -6,8 +6,8 @@ export const defaultTheme = {
   baseLabel: "#3A536B",
   baseText: "#AFC2D4",
   baseBorder: "#1C2F41",
-  basePost: "#112131",
+  basePost: "#112131", 
   baseProfile: "#0B1B2B",
-  baseBackground: "071422",
+  baseBackground: "#071422",
   baseInput: "#040F1A",
 };

@@ -7,6 +7,11 @@ export const GlobalStyles = createGlobalStyle`
     padding: 0;
   }
 
+  body {
+    background: ${(p) => p.theme.baseBackground};
+    color: ${(p) => p.theme.baseText};
+  }
+
   body,button,text-area,input {
     border: none;
     outline: 0;
