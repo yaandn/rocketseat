@@ -23,7 +23,7 @@ export function AccountMenu() {
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-56">
         <DropdownMenuLabel className="flex flex-col">
-          <span>Diego Fernandes</span>
+          <span>Yan Di Nápoli</span>
           <span className="text-xs font-normal text-muted-foreground">
             dinapoliyan@gmail.com
           </span>
