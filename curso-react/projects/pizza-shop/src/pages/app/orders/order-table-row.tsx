@@ -5,7 +5,17 @@ import { TableCell, TableRow } from "@/components/ui/table";
 import { ArrowRight, Search, X } from "lucide-react";
 import { OrderDetails } from "./order-details";
 
-export function OrderTableRow() {
+export interface OrderTableRowProps {
+  order: {
+    orderId: string;
+    createdAt: Date;
+    status: "pending" | "canceled" | "processing" | "delivering" | "delivered";
+    customerName: string;
+    total: number;
+  };
+}
+
+export function OrderTableRow({ order }: OrderTableRowProps) {
   return (
     <TableRow>
       <TableCell>
@@ -21,9 +31,9 @@ export function OrderTableRow() {
       </TableCell>
 
       <TableCell className="font-mono text-sm font-medium">
-        2323jkjkjak421
+        {order.orderId}
       </TableCell>
-      <TableCell className="text-muted-foreground">Há 15 minutos</TableCell>
+      <TableCell className="text-muted-foreground">{order.status}</TableCell>
       <TableCell>
         <div className="flex items-center gap-2">
           <span className="h-2 w-2 rounded-full bg-slate-400" />
